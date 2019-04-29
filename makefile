@@ -1,14 +1,16 @@
-CC = gcc
-flags = -Wall -Wextra -pedantic
+CC= gcc
+CFLAGS=-Wall -Wextra -pedantic
 
+OBJ= main.o arbre.o dico.o
 
+EXEC=exec
 
-exe : main.o
-	${CC} main.o -o exe ${flags}
-	echo "executer avec ./exe"
-	
-main.o : main.c main.h
-	${CC} main.c -g -c ${flags}
+$(EXEC) : $(OBJ)
+	$(CC) -g $^ -o $@
+	echo "executer avec ./exec"
+
+%.o : %.c
+	$(CC) -g -c $< $(CFLAGS)
 
 clean :
-	rm *.o exe
+	rm -rf dep *.o vgcore.*
