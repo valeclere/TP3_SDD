@@ -1,7 +1,7 @@
 /* Module contenant les fonctions pour insérer les mots dans l'arbre*/
 
 #include "arbre.h"
-
+#include <stdbool.h>
 Noeud_t * InitNoeud(char lettre)
 {
 	Noeud_t * pt_Noeud = NULL;
@@ -68,3 +68,25 @@ Arbre_t CreationArbre(void)
 	
 	return arbre;
 }
+
+Noeud_t * Rechercher(Arbre_t arbre, char * pt_mot){
+    int i=0;
+    bool arret=false;
+    while (pt_mot[i]!='\0'&& arret==false){
+        while(arbre->lettre!=pt_mot[i] && arbre->lh!=NULL)
+        {
+            arbre=arbre->lh;
+        }
+        if(arbre->lh==NULL) arret=true;
+        else
+        {
+            if(arbre->lv==NULL) arret=true;
+            else
+            {
+                i++;
+            }
+        }
+    }
+    return arbre;
+}
+
