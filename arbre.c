@@ -27,33 +27,47 @@ Noeud_t * InitNoeud(char lettre)
 
 void AjoutVerticale(Noeud_t * pere, Noeud_t * fils)
 {
-	if (pere->lv!=NULL)
-	{
-		printf("Attention fils déjà existant !\n");
-	}
+	//~ if (pere->lv!=NULL)
+	//~ {
+		//~ printf("Attention fils déjà existant !\n");
+	//~ }
 	
-	else
-	{
-		pere->lv = fils;
-	}
+	pere->lv = fils;
+
 }
 	
 
 
 void AjoutHorizontale(Noeud_t * GrandFrere, Noeud_t * PetitFrere)
 {
-	if (GrandFrere->lh!=NULL)
-	{
-		printf("Attention frere déjà existant !\n");
-	}
-	
-	else
-	{
-		GrandFrere->lh = PetitFrere;
-	}
+	//~ if (GrandFrere->lh!=NULL)
+	//~ {
+		//~ printf("Attention frere déjà existant !\n");
+	//~ }
+		
+	GrandFrere->lh = PetitFrere;
 }
 
-
+Arbre_t CreationArbre(void)
+{
+	Arbre_t arbre;
+	
+	arbre = InitNoeud('a');
+	Noeud_t * fils = InitNoeud('B');
+	Noeud_t * frere = InitNoeud('C');
+	AjoutVerticale(arbre, fils);
+	AjoutHorizontale(fils, frere);
+	
+	printf("mot 1 = %c%c \n mot 2 = %c%c\n", arbre->lettre, arbre->lv->lettre, arbre->lettre, arbre->lv->lh->lettre);
+	
+	printf("l'arbre est cree!!\n");
+	
+	free(arbre);
+	free(fils);
+	free(frere);
+	
+	return arbre;
+}
 
 
 
