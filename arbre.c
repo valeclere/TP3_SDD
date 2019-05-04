@@ -52,14 +52,17 @@ Arbre_t CreationArbre(void)
 {
 	Arbre_t arbre;
 	
-	arbre = InitNoeud('a');
+	arbre = InitNoeud('z');
 	Noeud_t * fils = InitNoeud('B');
 	Noeud_t * frere = InitNoeud('C');
 	AjoutVerticale(arbre, fils);
 	AjoutHorizontale(fils, frere);
 	
-    printf("l'adresse de c = %p\n", frere);
-	printf("mot 1 = %c%c \n mot 2 = %c%c\n", arbre->lettre, arbre->lv->lettre, arbre->lettre, arbre->lv->lh->lettre);
+    printf("l'adresse de z = %p\n", arbre);
+    printf("l'adresse de B = %p\n", fils);
+    printf("l'adresse de C = %p\n", frere);
+
+	printf("mot 1 = %c%c \nmot 2 = %c%c\n", arbre->lettre, arbre->lv->lettre, arbre->lettre, arbre->lv->lh->lettre);
 	
 	printf("l'arbre est cree!!\n");
 	
@@ -70,22 +73,22 @@ Arbre_t CreationArbre(void)
 	return arbre;
 }
 
-Noeud_t * Rechercher(Arbre_t arbre, char * pt_mot, int * indiceMot){
+Noeud_t * Rechercher(Arbre_t arbre, char * pt_mot, int * indiceMot){// à optimiser!!!!
     *indiceMot=0;
     bool arret=false;
-    Arbre_t retour=arbre;
+    //Arbre_t retour=arbre;
     Noeud_t * cour=arbre;
-    Noeud_t * prec=arbre;
+    Noeud_t * prec=NULL;
     while(arret==false){
         while(cour!=NULL && cour->lettre<pt_mot[*indiceMot]){
             prec=cour;
             cour=cour->lh;
         }
-        if(cour!=NULL){
-            if(cour->lv!=NULL && cour->lettre==pt_mot[*indiceMot]  ){
+        if(cour!=NULL){// si la première lettre n'est pas plus loin dans l'alphabet
+            if(cour->lv!=NULL && cour->lettre==pt_mot[*indiceMot]  ){//si on tombe sur la bonne lettre et que cours à au moins un fils
                 prec=cour;
                 cour=cour->lv;
-                if(pt_mot[*indiceMot+1]=='\0') arret=true;
+                if(pt_mot[*indiceMot+1]=='\0') arret=true; // si on est à la fin du mot
                 (*indiceMot)++;
             }
             else{
@@ -94,8 +97,6 @@ Noeud_t * Rechercher(Arbre_t arbre, char * pt_mot, int * indiceMot){
         }
         else arret=true;
     }
-    if(cour->lettre==pt_mot[*indiceMot]) retour=cour;
-    else retour=prec;
-    
-    return retour;
+    if(cour!=NULL) if(cour->lh == NULL && cour->lv==NULL) prec=cour;
+    return prec;
 }

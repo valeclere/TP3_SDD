@@ -7,9 +7,9 @@ int main()
 	Arbre_t arbre;
     Arbre_t prec;
     int i=0;
-    char mot[]="aCd";
+    char mot[]="";
 	arbre = CreationArbre();
-    prec = Rechercher(arbre,mot,&i);
+    prec = Rechercher(NULL,mot,&i);
     printf("l'adresse de prec = %p\n", prec);
 
 	/*---------FIN TESTS----------*/
