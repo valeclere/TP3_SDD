@@ -68,12 +68,3 @@ Arbre_t CreationArbre(void)
 	
 	return arbre;
 }
-
-
-
-
-
-
-
-
-
