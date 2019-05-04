@@ -58,35 +58,44 @@ Arbre_t CreationArbre(void)
 	AjoutVerticale(arbre, fils);
 	AjoutHorizontale(fils, frere);
 	
+    printf("l'adresse de c = %p\n", frere);
 	printf("mot 1 = %c%c \n mot 2 = %c%c\n", arbre->lettre, arbre->lv->lettre, arbre->lettre, arbre->lv->lh->lettre);
 	
 	printf("l'arbre est cree!!\n");
 	
-	free(arbre);
-	free(fils);
-	free(frere);
+//    free(arbre);
+//    free(fils);
+//    free(frere);
 	
 	return arbre;
 }
 
-Noeud_t * Rechercher(Arbre_t arbre, char * pt_mot){
-    int i=0;
+Noeud_t * Rechercher(Arbre_t arbre, char * pt_mot, int * indiceMot){
+    *indiceMot=0;
     bool arret=false;
-    while (pt_mot[i]!='\0'&& arret==false){
-        while(arbre->lettre!=pt_mot[i] && arbre->lh!=NULL)
-        {
-            arbre=arbre->lh;
+    Arbre_t retour=arbre;
+    Noeud_t * cour=arbre;
+    Noeud_t * prec=arbre;
+    while(arret==false){
+        while(cour!=NULL && cour->lettre<pt_mot[*indiceMot]){
+            prec=cour;
+            cour=cour->lh;
         }
-        if(arbre->lh==NULL) arret=true;
-        else
-        {
-            if(arbre->lv==NULL) arret=true;
-            else
-            {
-                i++;
+        if(cour!=NULL){
+            if(cour->lv!=NULL && cour->lettre==pt_mot[*indiceMot]  ){
+                prec=cour;
+                cour=cour->lv;
+                if(pt_mot[*indiceMot+1]=='\0') arret=true;
+                (*indiceMot)++;
+            }
+            else{
+                arret=true;
             }
         }
+        else arret=true;
     }
-    return arbre;
+    if(cour->lettre==pt_mot[*indiceMot]) retour=cour;
+    else retour=prec;
+    
+    return retour;
 }
-
