@@ -11,6 +11,8 @@ int main()
 	arbre = CreationArbre();
     prec = Rechercher(NULL,mot,&i);
     printf("l'adresse de prec = %p\n", prec);
+    
+    LibererArbre(arbre);
 
 	/*---------FIN TESTS----------*/
 	

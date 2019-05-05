@@ -14,8 +14,10 @@ typedef struct Noeud_s{
 Noeud_t * InitNoeud(char lettre);
 void AjoutVerticale(Noeud_t * pere, Noeud_t * fils);
 void AjoutHorizontale(Noeud_t * GrandFrere, Noeud_t * PetitFrere);
-Arbre_t CreationArbre(void);
 Noeud_t * Rechercher(Arbre_t arbre, char * pt_mot, int * indiceMot);
+
+Arbre_t CreationArbre(void);
+void LibererArbre(Arbre_t arbre);
 
 
 #endif

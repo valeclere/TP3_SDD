@@ -66,10 +66,6 @@ Arbre_t CreationArbre(void)
 	
 	printf("l'arbre est cree!!\n");
 	
-//    free(arbre);
-//    free(fils);
-//    free(frere);
-	
 	return arbre;
 }
 
@@ -85,7 +81,7 @@ Noeud_t * Rechercher(Arbre_t arbre, char * pt_mot, int * indiceMot){// à optimi
             cour=cour->lh;
         }
         if(cour!=NULL){// si la première lettre n'est pas plus loin dans l'alphabet
-            if(cour->lv!=NULL && cour->lettre==pt_mot[*indiceMot]  ){//si on tombe sur la bonne lettre et que cours à au moins un fils
+            if(cour->lv!=NULL && cour->lettre==pt_mot[*indiceMot]){//si on tombe sur la bonne lettre et que cours à au moins un fils
                 prec=cour;
                 cour=cour->lv;
                 if(pt_mot[*indiceMot+1]=='\0') arret=true; // si on est à la fin du mot
@@ -100,3 +96,10 @@ Noeud_t * Rechercher(Arbre_t arbre, char * pt_mot, int * indiceMot){// à optimi
     if(cour!=NULL) if(cour->lh == NULL && cour->lv==NULL) prec=cour;
     return prec;
 }
+
+void LibererArbre(Arbre_t arbre){
+	free(arbre->lv->lh);
+	free(arbre->lv);
+	free(arbre);
+}
+
