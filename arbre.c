@@ -1,7 +1,6 @@
 /* Module contenant les fonctions pour insérer les mots dans l'arbre*/
 
 #include "arbre.h"
-#include <stdbool.h>
 Noeud_t * InitNoeud(char lettre)
 {
 	Noeud_t * pt_Noeud = NULL;
@@ -96,6 +95,40 @@ Noeud_t * Rechercher(Arbre_t arbre, char * pt_mot, int * indiceMot){// à optimi
     if(cour!=NULL) if(cour->lh == NULL && cour->lv==NULL) prec=cour;
     return prec;
 }
+
+
+
+bool Insertion(Arbre_t *pt_arbre, char * mot){
+    int i=0;
+    bool retour=false;
+    
+    Noeud_t * prec = Rechercher(*pt_arbre, mot, &i);
+    Noeud_t *nouvLettre=NULL;
+    if(prec==NULL){                // arbre vide ou insertion avant le premier élément
+        prec=InitNoeud(mot[i]);
+        prec->lettre=mot[i];
+        prec->lh=*pt_arbre;
+        *pt_arbre=prec;
+    }
+    if(prec->lettre!=mot[i]){     // l'insertion ce fait dans les frères (insertion horizontale)
+        nouvLettre=InitNoeud(mot[i]);
+        nouvLettre->lettre=mot[i];
+        nouvLettre->lh=prec->lh; // on chaine la nouvelle lettre dans la liste des frères
+        prec->lh=nouvLettre;
+        prec=nouvLettre;
+    }
+    i++;
+    while (mot[i]!='\0'){
+        nouvLettre = InitNoeud(mot[i]);
+        nouvLettre->lettre=mot[i];
+        prec->lv=nouvLettre;
+        prec=nouvLettre;
+        i++;
+    }
+    return retour;
+}
+
+
 
 void LibererArbre(Arbre_t arbre){
 	free(arbre->lv->lh);
