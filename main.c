@@ -1,4 +1,6 @@
+#include "dico.h"
 #include "arbre.h"
+
 
 int main()
 {
@@ -13,19 +15,19 @@ int main()
 //    printf("l'adresse de prec = %p\n", prec);
 //    LibererArbre(arbre);
     //fin test des fonctions de bases.
-    Arbre_t arbre=NULL;
-    Arbre_t *pt_arbre=NULL;
-    pt_arbre=&arbre;
+	Arbre_t arbre=NULL;
+
 
 //    Insertion(pt_arbre, "banc");
 //    Insertion(pt_arbre, "alpha");
 //    Insertion(pt_arbre, "grand");
-//    Insertion(pt_arbre, "bleu");
-      Insertion(pt_arbre, "alpha");
-      Insertion(pt_arbre, "alle");
+//    Insertion(pt_arbre, "bleu"); //on n'est pas obligé de déclarer un pointeur 
+      //~ Insertion(&arbre, "alpha");
+      //~ Insertion(&arbre, "alle");
     
-    
-
+	ChargerMots(&arbre);
+	
+	
 	/*---------FIN TESTS----------*/
 	
 	

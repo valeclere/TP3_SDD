@@ -1,6 +1,8 @@
 /* Module contenant les fonctions pour insérer les mots dans l'arbre*/
 
 #include "arbre.h"
+
+
 Noeud_t * InitNoeud(char lettre)
 {
 	Noeud_t * pt_Noeud = NULL;
