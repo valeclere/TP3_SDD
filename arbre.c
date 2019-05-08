@@ -95,7 +95,7 @@ Noeud_t * Rechercher(Arbre_t arbre, char * pt_mot, int * indiceMot){// à optimi
     if(cour!=NULL) if(cour->lh == NULL && cour->lv==NULL) prec=cour;
     return prec;
 }
-
+//à la fin de rechercher i correspond à l'indice de la première lettre à insérer
 
 
 bool Insertion(Arbre_t *pt_arbre, char * mot){
@@ -104,20 +104,40 @@ bool Insertion(Arbre_t *pt_arbre, char * mot){
     
     Noeud_t * prec = Rechercher(*pt_arbre, mot, &i);
     Noeud_t *nouvLettre=NULL;
-    if(prec==NULL){                // arbre vide ou insertion avant le premier élément
+    
+    if(prec==NULL){                //CAS 1 : arbre vide ou insertion avant le premier élément
         prec=InitNoeud(mot[i]);
-        prec->lettre=mot[i];
+        prec->lettre=mot[i]; 
+        // pouruoi un noeud contenant lettre = \0 est en racine ???
         prec->lh=*pt_arbre;
         *pt_arbre=prec;
+        i++;
     }
-    if(prec->lettre!=mot[i]){     // l'insertion ce fait dans les frères (insertion horizontale)
-        nouvLettre=InitNoeud(mot[i]);
-        nouvLettre->lettre=mot[i];
-        nouvLettre->lh=prec->lh; // on chaine la nouvelle lettre dans la liste des frères
-        prec->lh=nouvLettre;
-        prec=nouvLettre;
-    }
-    i++;
+    
+    else{
+    
+	    if(prec->lettre!=mot[i]){ // CAS 2 lettre à insérer horizontalement (l'insertion ce fait dans les frères)
+	        nouvLettre=InitNoeud(mot[i]);
+	        nouvLettre->lettre=mot[i];
+	        nouvLettre->lh=prec->lh; // on chaine la nouvelle lettre dans la liste des frères
+	        prec->lh=nouvLettre;
+	        prec=nouvLettre;
+	        i++;
+	    }
+	    
+	    else{
+		    if (prec->lettre == mot[i-1] && prec->lv!=NULL){  // CAS 3 : lettre à insérer horizontalement en position 1 insertion (insertion en position 1 des fils) (est-il possible de rassembler le cas 1 et le cas 3 ??
+				nouvLettre = InitNoeud(mot[i]);
+		        nouvLettre->lettre=mot[i];
+		        nouvLettre->lh=prec->lv;  //prec->lv->lh;
+		        prec->lv=nouvLettre;
+		        prec = nouvLettre;
+		        i++;
+			}
+		}
+	
+	}
+    
     while (mot[i]!='\0'){
         nouvLettre = InitNoeud(mot[i]);
         nouvLettre->lettre=mot[i];
@@ -125,6 +145,8 @@ bool Insertion(Arbre_t *pt_arbre, char * mot){
         prec=nouvLettre;
         i++;
     }
+    prec->lettre = toupper(prec->lettre);
+    
     return retour;
 }
 
