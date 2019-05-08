@@ -109,16 +109,14 @@ bool Insertion(Arbre_t *pt_arbre, char * mot){
     
     if(prec==NULL){                //CAS 1 : arbre vide ou insertion avant le premier élément
         prec=InitNoeud(mot[i]);
-        prec->lettre=mot[i]; 
-        // pouruoi un noeud contenant lettre = \0 est en racine ???
+        prec->lettre=mot[i];
         prec->lh=*pt_arbre;
         *pt_arbre=prec;
         i++;
     }
     
     else{
-    
-	    if(prec->lettre!=mot[i]){ // CAS 2 lettre à insérer horizontalement (l'insertion ce fait dans les frères)
+	    if(tolower(prec->lettre)!=mot[i]){ // CAS 2 lettre à insérer horizontalement (l'insertion ce fait dans les frères)
 	        nouvLettre=InitNoeud(mot[i]);
 	        nouvLettre->lettre=mot[i];
 	        nouvLettre->lh=prec->lh; // on chaine la nouvelle lettre dans la liste des frères
@@ -128,7 +126,7 @@ bool Insertion(Arbre_t *pt_arbre, char * mot){
 	    }
 	    
 	    else{
-		    if (prec->lettre == mot[i-1] && prec->lv!=NULL){  // CAS 3 : lettre à insérer horizontalement en position 1 insertion (insertion en position 1 des fils) (est-il possible de rassembler le cas 1 et le cas 3 ??
+		    if (tolower(prec->lettre) == mot[i-1] && prec->lv!=NULL){  // CAS 3 : lettre à insérer horizontalement en position 1 insertion (insertion en position 1 des fils) (est-il possible de rassembler le cas 1 et le cas 3 ??
 				nouvLettre = InitNoeud(mot[i]);
 		        nouvLettre->lettre=mot[i];
 		        nouvLettre->lh=prec->lv;  //prec->lv->lh;
@@ -137,7 +135,6 @@ bool Insertion(Arbre_t *pt_arbre, char * mot){
 		        i++;
 			}
 		}
-	
 	}
     
     while (mot[i]!='\0'){
@@ -151,7 +148,6 @@ bool Insertion(Arbre_t *pt_arbre, char * mot){
     
     return retour;
 }
-
 
 
 void LibererArbre(Arbre_t arbre){

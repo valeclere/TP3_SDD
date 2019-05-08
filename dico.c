@@ -9,8 +9,10 @@ void fgets2(char * mot, int n ,FILE * fichier)
 {
 	int i=0;
 	fgets(mot,n,fichier);
-	while (mot[i]!='\n') i++;
+	while (mot[i]!='\n' && i<n) i++;
 	mot[i]='\0';
+	
+	//printf("mot = %s\n\n", mot);
 }
 
 
