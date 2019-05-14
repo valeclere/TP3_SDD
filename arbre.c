@@ -70,83 +70,51 @@ Arbre_t CreationArbre(void)
 	return arbre;
 }
 
-Noeud_t * Rechercher(Arbre_t arbre, char * pt_mot, int * indiceMot){// à optimiser!!!!
+Noeud_t ** Rechercher(Arbre_t * pt_arbre, char * pt_mot, int * indiceMot){// à optimiser!!!!
     *indiceMot=0;
     bool arret=false;
     //Arbre_t retour=arbre;
-    Noeud_t * cour=arbre;
-    Noeud_t * prec=NULL;
+    Noeud_t * cour=*pt_arbre;
+    Noeud_t ** prec=pt_arbre;
     while(arret==false){
-        while(cour!=NULL && cour->lettre<pt_mot[*indiceMot]){
-            prec=cour;
+        while(cour!=NULL && cour->lettre<tolower(pt_mot[*indiceMot])){
+            prec=&(cour->lh);
             cour=cour->lh;
         }
-        if(cour!=NULL){// si la première lettre n'est pas plus loin dans l'alphabet
-            if(cour->lv!=NULL && cour->lettre==pt_mot[*indiceMot]){//si on tombe sur la bonne lettre et que cours à au moins un fils
-                prec=cour;
-                cour=cour->lv;
-                if(pt_mot[*indiceMot+1]=='\0') arret=true; // si on est à la fin du mot
-                (*indiceMot)++;
-            }
-            else{
-                arret=true;
-            }
-        }
-        else arret=true;
+		if(cour!=NULL && cour->lettre==tolower(pt_mot[*indiceMot])){//si on tombe sur la bonne lettre et que cours à au moins un fils
+			prec=&(cour->lv);
+			cour=cour->lv;
+			if(pt_mot[*indiceMot+1]=='\0') arret=true; // si on est à la fin du mot
+			else (*indiceMot)++;
+		}
+		else arret=true;
     }
-    if(cour!=NULL) if(cour->lh == NULL && cour->lv==NULL) prec=cour;
     return prec;
 }
 //à la fin de rechercher i correspond à l'indice de la première lettre à insérer
 
 
-bool Insertion(Arbre_t *pt_arbre, char * mot){
+void Insertion(Arbre_t * pt_arbre, char * mot){
     int i=0;
-    bool retour=false;
     
-    Noeud_t * prec = Rechercher(*pt_arbre, mot, &i);
-    Noeud_t *nouvLettre=NULL;
+    Noeud_t ** prec = Rechercher(pt_arbre, mot, &i);
+    Noeud_t * nouvLettre=NULL;
     
-    if(prec==NULL){                //CAS 1 : arbre vide ou insertion avant le premier élément
-        prec=InitNoeud(mot[i]);
-        prec->lettre=mot[i];
-        prec->lh=*pt_arbre;
-        *pt_arbre=prec;
-        i++;
-    }
-    
-    else{
-	    if(tolower(prec->lettre)!=mot[i]){ // CAS 2 lettre à insérer horizontalement (l'insertion ce fait dans les frères)
-	        nouvLettre=InitNoeud(mot[i]);
-	        nouvLettre->lettre=mot[i];
-	        nouvLettre->lh=prec->lh; // on chaine la nouvelle lettre dans la liste des frères
-	        prec->lh=nouvLettre;
-	        prec=nouvLettre;
-	        i++;
-	    }
-	    
-	    else{
-		    if (tolower(prec->lettre) == mot[i-1] && prec->lv!=NULL){  // CAS 3 : lettre à insérer horizontalement en position 1 insertion (insertion en position 1 des fils) (est-il possible de rassembler le cas 1 et le cas 3 ??
-				nouvLettre = InitNoeud(mot[i]);
-		        nouvLettre->lettre=mot[i];
-		        nouvLettre->lh=prec->lv;  //prec->lv->lh;
-		        prec->lv=nouvLettre;
-		        prec = nouvLettre;
-		        i++;
-			}
-		}
-	}
+    nouvLettre=InitNoeud(mot[i]);
+	nouvLettre->lettre=mot[i];
+	nouvLettre->lh=*prec; // on chaine la nouvelle lettre dans la liste des frères
+	*prec=nouvLettre;
+	prec=&nouvLettre->lv;
+	i++;
     
     while (mot[i]!='\0'){
-        nouvLettre = InitNoeud(mot[i]);
-        nouvLettre->lettre=mot[i];
-        prec->lv=nouvLettre;
-        prec=nouvLettre;
-        i++;
+        nouvLettre=InitNoeud(mot[i]);
+		nouvLettre->lettre=mot[i];
+		*prec=nouvLettre;
+		prec=&nouvLettre->lv;
+		i++;
     }
-    prec->lettre = toupper(prec->lettre);
-    
-    return retour;
+    nouvLettre->lettre = toupper(nouvLettre->lettre);
 }
 
 
@@ -155,4 +123,3 @@ void LibererArbre(Arbre_t arbre){
 	free(arbre->lv);
 	free(arbre);
 }
-
