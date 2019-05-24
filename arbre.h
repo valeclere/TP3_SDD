@@ -8,7 +8,6 @@
 #include <ctype.h>
 
 
-
 typedef struct Noeud_s{
 	char lettre;
 	struct Noeud_s * lv;

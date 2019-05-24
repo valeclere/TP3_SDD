@@ -77,11 +77,11 @@ Noeud_t ** Rechercher(Arbre_t * pt_arbre, char * pt_mot, int * indiceMot){// à 
     Noeud_t * cour=*pt_arbre;
     Noeud_t ** prec=pt_arbre;
     while(arret==false){
-        while(cour!=NULL && cour->lettre<tolower(pt_mot[*indiceMot])){
+        while(cour!=NULL && tolower(cour->lettre)<pt_mot[*indiceMot]){
             prec=&(cour->lh);
             cour=cour->lh;
         }
-		if(cour!=NULL && cour->lettre==tolower(pt_mot[*indiceMot])){//si on tombe sur la bonne lettre et que cours à au moins un fils
+		if(cour!=NULL && tolower(cour->lettre)==pt_mot[*indiceMot]){//si on tombe sur la bonne lettre et que cours à au moins un fils
 			prec=&(cour->lv);
 			cour=cour->lv;
 			if(pt_mot[*indiceMot+1]=='\0') arret=true; // si on est à la fin du mot
@@ -115,6 +115,7 @@ void Insertion(Arbre_t * pt_arbre, char * mot){
 		i++;
     }
     nouvLettre->lettre = toupper(nouvLettre->lettre);
+    printf("derniere lettre == %c\n", nouvLettre->lettre); 
 }
 
 
@@ -123,3 +124,9 @@ void LibererArbre(Arbre_t arbre){
 	free(arbre->lv);
 	free(arbre);
 }
+
+void AfficherArbre(Arbre_t arbre){
+	
+	
+}
+

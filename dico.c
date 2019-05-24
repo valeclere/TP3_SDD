@@ -5,17 +5,6 @@
 
 #include "dico.h"
 
-void fgets2(char * mot, int n ,FILE * fichier)
-{
-	int i=0;
-	fgets(mot,n,fichier);
-	while (mot[i]!='\n' && i<n) i++;
-	mot[i]='\0';
-	
-	//printf("mot = %s\n\n", mot);
-}
-
-
 int ChargerMots(Arbre_t * pt_arbre)
 {
 	int code = 0;
@@ -30,10 +19,14 @@ int ChargerMots(Arbre_t * pt_arbre)
 	}
 	else
 	{
+		fgets(mot,30,fichier);
+		mot[strlen(mot)-1] = 0;
 		while(!feof(fichier))
 		{
-			fgets2(mot,30,fichier);
+			printf("mot == %s\n", mot);
 			Insertion(pt_arbre,mot);
+			fgets(mot,30,fichier);
+			mot[strlen(mot)-1] = 0;
 		}
 	}
 	fclose(fichier);
