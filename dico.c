@@ -48,12 +48,12 @@ void Affichage(Arbre_t *pt_arbre){ /*utilisation du parcours en profondeur*/
     int mistake =0;
     int *err=&mistake;
     
-    char mot[30]; /*mot qui permet l'affichage des mots de l'arbre*/
+    char mot[30]={NULL}; /*mot qui permet l'affichage des mots de l'arbre*/
     int i=0;
-    
     while(!estVide(pt_pile) || cour !=NULL){
                                                         /*       prefixé   */
                                     /*(97 à 122 pour les minuscules et 65 à 90 pour les Maj)*/
+        //printf("lettre: %c\n",cour->lettre);
         mot[i]=cour->lettre;
         i++;
         if((int)cour->lettre<90){                   /* on arrive à une maj -->fin du mot*/

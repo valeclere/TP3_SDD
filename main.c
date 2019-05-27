@@ -28,7 +28,7 @@ int main()
       //~ Insertion(&arbre, "alle");
     
 	ChargerMots(&arbre);
-    ParcourProfondeur(&arbre);
+    Affichage(&arbre);
    // Affichage(&arbre);
 	//~ int tab[3] = T
 	//~ if (tolower('A')=='a'){
