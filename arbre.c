@@ -89,6 +89,7 @@ Noeud_t ** Rechercher(Arbre_t * pt_arbre, char * pt_mot, int * indiceMot){// à 
 		}
 		else arret=true;
     }
+    //if(*prec!=NULL)printf("lettre prec= %c\n",(*prec)->lettre);
     return prec;
 }
 //à la fin de rechercher i correspond à l'indice de la première lettre à insérer
@@ -115,7 +116,7 @@ void Insertion(Arbre_t * pt_arbre, char * mot){
 		i++;
     }
     nouvLettre->lettre = toupper(nouvLettre->lettre);
-    printf("derniere lettre == %c\n", nouvLettre->lettre); 
+    //printf("derniere lettre = %c\n", nouvLettre->lettre);
 }
 
 

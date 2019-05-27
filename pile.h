@@ -4,9 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h> /* pour récupérer le type bool */
-
-#define FORMAT_ELT "%d\n" /* format utilisé dans le printf correspondant au type de element_t */
-typedef int element_t; /* type de variables présentes dans le tableau, ici on considère des int */
+#include "arbre.h"
+#define FORMAT_ELT "%c\n" /* format utilisé dans le printf correspondant au type de element_t */
+typedef Arbre_t element_t; /* type de variables présentes dans le tableau, ici on considère des int */
 
 typedef struct Pile_s{
 	int taille;
