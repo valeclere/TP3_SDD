@@ -45,7 +45,7 @@ Noeud_t ** Rechercher(Arbre_t * pt_arbre, char * pt_mot, int * indiceMot, int * 
     *indiceMot=0; /*on initialise le déplacement dans le mot à 0*/
     *trouve=0;
     bool arret=false; /*booléen pour détecter la fin de la recherche*/
-    //Arbre_t retour=arbre;
+    
     Noeud_t * cour=*pt_arbre; /*pointeur de parcours initialisé sur la racine*/
     Noeud_t ** prec=pt_arbre; /*pointeur précédent initialisé sur le pointeur de la racine*/
     while(arret==false){
@@ -57,7 +57,7 @@ Noeud_t ** Rechercher(Arbre_t * pt_arbre, char * pt_mot, int * indiceMot, int * 
 			prec=&(cour->lv);
 			cour=cour->lv;
 			if(pt_mot[*indiceMot+1]=='\0'){ /*si on est à la fin du mot*/
-				arret=true; 
+				arret=true;
 				*trouve=1;
 			}
 			else (*indiceMot)++; /*on se décale dans le mot à insérer*/
@@ -81,21 +81,24 @@ void Insertion(Arbre_t * pt_arbre, char * mot){
     Noeud_t ** prec = Rechercher(pt_arbre, mot, &i, &trouve); /*on récupère prec pour insérer la fin du mot*/
     Noeud_t * nouvLettre=NULL;
     
-    nouvLettre=InitNoeud(mot[i]); /*allocation d'un nouveau noeud*/
-	nouvLettre->lettre=mot[i]; /*on place la prochaine lettre*/
-	nouvLettre->lh=*prec; /*on chaine la nouvelle lettre dans la liste des frères*/
-	*prec=nouvLettre;
-	prec=&nouvLettre->lv; /*on actualise prec sur le nouveau noeud en lien vertical pour insérer toute la suite*/
-	i++; /*on se déplace dans le mot*/
     
-    while (mot[i]!='\0'){ /*tant qu'on a pas inséré tout le mot on réalise une insertion verticale de la lettre*/
-        nouvLettre=InitNoeud(mot[i]);
-		nouvLettre->lettre=mot[i];
+    if(!trouve){
+		nouvLettre=InitNoeud(mot[i]); /*allocation d'un nouveau noeud*/
+		nouvLettre->lettre=mot[i]; /*on place la prochaine lettre*/
+		nouvLettre->lh=*prec; /*on chaine la nouvelle lettre dans la liste des frères*/
 		*prec=nouvLettre;
-		prec=&nouvLettre->lv;
-		i++;
-    }
-    nouvLettre->lettre = toupper(nouvLettre->lettre); /*on transforme la dernière lettre en majuscule*/
+		prec=&nouvLettre->lv; /*on actualise prec sur le nouveau noeud en lien vertical pour insérer toute la suite*/
+		i++; /*on se déplace dans le mot*/
+		
+		while (mot[i]!='\0'){ /*tant qu'on a pas inséré tout le mot on réalise une insertion verticale de la lettre*/
+			nouvLettre=InitNoeud(mot[i]);
+			nouvLettre->lettre=mot[i];
+			*prec=nouvLettre;
+			prec=&nouvLettre->lv;
+			i++;
+		}
+		nouvLettre->lettre = toupper(nouvLettre->lettre); /*on transforme la dernière lettre en majuscule*/
+	}
 }
 
 
