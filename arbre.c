@@ -23,53 +23,6 @@ Noeud_t * InitNoeud(char lettre)
 	return pt_Noeud;
 }
 
-
-
-
-void AjoutVerticale(Noeud_t * pere, Noeud_t * fils)
-{
-	//~ if (pere->lv!=NULL)
-	//~ {
-		//~ printf("Attention fils déjà existant !\n");
-	//~ }
-	
-	pere->lv = fils;
-
-}
-	
-
-
-void AjoutHorizontale(Noeud_t * GrandFrere, Noeud_t * PetitFrere)
-{
-	//~ if (GrandFrere->lh!=NULL)
-	//~ {
-		//~ printf("Attention frere déjà existant !\n");
-	//~ }
-		
-	GrandFrere->lh = PetitFrere;
-}
-
-Arbre_t CreationArbre(void)
-{
-	Arbre_t arbre;
-	
-	arbre = InitNoeud('z');
-	Noeud_t * fils = InitNoeud('B');
-	Noeud_t * frere = InitNoeud('C');
-	AjoutVerticale(arbre, fils);
-	AjoutHorizontale(fils, frere);
-	
-    printf("l'adresse de z = %p\n", arbre);
-    printf("l'adresse de B = %p\n", fils);
-    printf("l'adresse de C = %p\n", frere);
-
-	printf("mot 1 = %c%c \nmot 2 = %c%c\n", arbre->lettre, arbre->lv->lettre, arbre->lettre, arbre->lv->lh->lettre);
-	
-	printf("l'arbre est cree!!\n");
-	
-	return arbre;
-}
-
 Noeud_t ** Rechercher(Arbre_t * pt_arbre, char * pt_mot, int * indiceMot, int * trouve){// à optimiser!!!!
     *indiceMot=0;
     *trouve=0;
@@ -124,11 +77,5 @@ void Insertion(Arbre_t * pt_arbre, char * mot){
     //printf("derniere lettre = %c\n", nouvLettre->lettre);
 }
 
-
-void LibererArbre(Arbre_t arbre){
-	free(arbre->lv->lh);
-	free(arbre->lv);
-	free(arbre);
-}
 
 
