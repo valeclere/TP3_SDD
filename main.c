@@ -13,7 +13,9 @@ int main()
     test_Charger_Mots();
     test_Rechercher();
     test_Insertion();
-    
+    test_Recherche_Dico();
+    test_Affichage();
+    test_Affichage_Motif();
 	/*---------FIN TESTS----------*/
 	return 0;
 }

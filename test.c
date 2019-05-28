@@ -89,16 +89,12 @@ void test_Rechercher(){
 
 void test_Insertion(){
     Arbre_t arbre=NULL; /*utilisée pour les tests de cette fonction*/
-    Noeud_t ** prec= NULL;
-    int i=0;
-    int trouve=0;
-    char mot[20]={0};
     ChargerMots(&arbre,"/Users/pereiraloann/desktop/TP_SDD/TP3/TP3_SDD/motsInsertion.txt");
     printf("-----------------------------------------\n");
 	printf("------Test de la fonction Insertion-------\n");
     printf("-----------------------------------------\n\n");
     Affichage(&arbre,"");
-    printf("Utilisation de l'arbre ci-dessus pour le test de la recherche\n");
+    printf("Utilisation de l'arbre ci-dessus pour le test de l'insertion\n");
     
     printf("\n-----------------------------------------\n");
     printf("------Cas général : insertion d'un mot non présent dans l'arbre------\n");
@@ -152,14 +148,66 @@ void test_Insertion(){
 
 
 void test_Recherche_Dico(){
-	printf("------Test de la fonction RechercheDico-------\n");
+    Arbre_t arbre=NULL; /*utilisée pour les tests de cette fonction*/
+    ChargerMots(&arbre,"/Users/pereiraloann/desktop/TP_SDD/TP3/TP3_SDD/mots.txt");
+    printf("-----------------------------------------\n");
+    printf("------Test de la fonction RechercheDico-------\n");
+    printf("-----------------------------------------\n\n");
+    Affichage(&arbre,"");
+    printf("Utilisation de l'arbre ci-dessus pour le test de la recherche avec motif\n");
+    
+    printf("\n-----------------------------------------\n");
+    printf("------Cas générale: recherche motif qui existe dans l'arbre------\n");
+    printf("-----------------------------------------\n");
 
+    RechercheDico(&arbre, "ch");
+    
+    printf("\n-----------------------------------------\n");
+    printf("------Cas 1: recherche motif qui N'existe PAS dans l'arbre------\n");
+    printf("-----------------------------------------\n");
+    
+    RechercheDico(&arbre, "existepas");
+    
+    printf("\n-----------------------------------------\n");
+    printf("------Cas 2: recherche motif vide------\n");
+    printf("-----------------------------------------\n");
+    
+    RechercheDico(&arbre, "");
+    
+    printf("\n-----------------------------------------\n");
+    printf("--------\tFIN TESTS RECHERCHE DICO\t--------\n");
+    printf("-----------------------------------------\n\n");
+    LiberationArbre(&arbre);
 }
 
 void test_Affichage(){
-	printf("------Test de la fonction Affichage-------\n");
+    Arbre_t arbre=NULL; /*utilisée pour les tests de cette fonction*/
+    printf("-----------------------------------------\n");
+    printf("------Test de la fonction Affichage-------\n");
+    printf("-----------------------------------------\n\n");
+    Affichage(&arbre,"");
+    printf("Utilisation de l'arbre ci-dessus pour le test de l'affichage\n");
+    printf("Les cas principaux ont été gérés dans les tests de la fonctions ChargerMots\n");
+    
+    printf("\n-----------------------------------------\n");
+    printf("------Autre Cas: arbre=NULL ------\n");
+    printf("-----------------------------------------\n");
+    
+    Affichage(&arbre, "");
+    printf("\nN'affiche rien, car il n'a rien a afficher\n");
+    
+    printf("\n-----------------------------------------\n");
+    printf("--------\tFIN TESTS  AFFICHAGE\t--------\n");
+    printf("-----------------------------------------\n\n");
 }
 
 void test_Affichage_Motif(){
-	printf("------Test de la fonction AffichageMotif-------\n");
+    printf("-----------------------------------------\n");
+    printf("------Test de la fonction AffichageMotif-------\n");
+    printf("-----------------------------------------\n\n");
+    printf("Tous les cas ont été testés dans les testes de la fonction RechercheMotif.\n");
+    
+    printf("\n-----------------------------------------\n");
+    printf("--------\tFIN TESTS  AFFICHAGE MOTIF\t--------\n");
+    printf("-----------------------------------------\n\n");
 }
