@@ -126,8 +126,4 @@ void LibererArbre(Arbre_t arbre){
 	free(arbre);
 }
 
-void AfficherArbre(Arbre_t arbre){
-	
-	
-}
 

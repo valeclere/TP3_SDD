@@ -15,29 +15,18 @@ int main()
     //~ printf("l'adresse de prec = %p\n", prec);
     //~ LibererArbre(arbre);
     //fin test des fonctions de bases.
-	
-	
-	Arbre_t arbre=NULL;
-
-
-//    Insertion(pt_arbre, "banc");
-//    Insertion(pt_arbre, "alpha");
-//    Insertion(pt_arbre, "grand");
-//    Insertion(pt_arbre, "bleu"); //on n'est pas obligé de déclarer un pointeur 
-      //~ Insertion(&arbre, "alpha");
-      //~ Insertion(&arbre, "alle");
     
-	ChargerMots(&arbre);
+	Arbre_t arbre=NULL;
+	
+    ChargerMots(&arbre);
     Affichage(&arbre);
+    RechercheDico(&arbre, "sc");
    // Affichage(&arbre);
 	//~ int tab[3] = T
 	//~ if (tolower('A')=='a'){
 		//~ printf("A en min: %c\n",tolower('A'));
 	//~ }
-	
 	/*---------FIN TESTS----------*/
-	
-	
 	return 0;
 }
 

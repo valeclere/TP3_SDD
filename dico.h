@@ -8,4 +8,5 @@
 #include "pile.h"
 int ChargerMots(Arbre_t * pt_arbre);
 void Affichage(Arbre_t *pt_arbre);
+void RechercheDico(Arbre_t *pt_arbre, char* val);
 #endif

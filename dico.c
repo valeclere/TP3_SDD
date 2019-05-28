@@ -51,16 +51,13 @@ void Affichage(Arbre_t *pt_arbre){ /*utilisation du parcours en profondeur*/
     char mot[30]={NULL}; /*mot qui permet l'affichage des mots de l'arbre*/
     int i=0;
     while(!estVide(pt_pile) || cour !=NULL){
-                                                        /*       prefixé   */
-                                    /*(97 à 122 pour les minuscules et 65 à 90 pour les Maj)*/
-        //printf("lettre: %c\n",cour->lettre);
         mot[i]=cour->lettre;
         i++;
-        if((int)cour->lettre<90){                   /* on arrive à une maj -->fin du mot*/
+        if((int)cour->lettre<90){                   /*(97 à 122 pour les minuscules et 65 à 90 pour les Maj) on arrive à une maj -->fin du mot*/
             mot[i-1]=tolower(mot[i-1]);             /* on passe la dernière lettre en minuscule*/
             mot[strlen(mot)] = 0;                   /* \0 à la fin du mot*/
-            printf("mot : %s\n",mot);               /* on affiche le mot*/
-        }                                               /*   fin prefixé  */
+            printf("%s\n",mot);               /* on affiche le mot*/
+        }
         empiler(pt_pile, cour, err);
         cour=cour->lv;
         while(cour==NULL && !estVide(pt_pile)){
@@ -69,5 +66,21 @@ void Affichage(Arbre_t *pt_arbre){ /*utilisation du parcours en profondeur*/
             i--;                        /* on décrémente i pour l'insertion des futurs lettres*/
             cour=cour->lh;                            /*      fin postfixé     */
         }
+    }
+}
+
+
+void RechercheDico(Arbre_t *pt_arbre, char* val){
+    int indiceMot=0;
+    Noeud_t ** noeud=NULL;
+    noeud=Rechercher(pt_arbre, val, &indiceMot);
+    printf("lettre de noeud:%c\n",(*noeud)->lettre);
+    printf("lettre de val:%c\n",val[strlen(val)-1]);
+    if(*noeud!=NULL && *pt_arbre!=NULL){
+        printf("mot commençant par %s sont:\n",val);
+        Affichage(noeud);
+    }
+    else{
+        printf("Aucun mot trouvé commençant par %s.\n",val);
     }
 }
