@@ -70,8 +70,9 @@ Arbre_t CreationArbre(void)
 	return arbre;
 }
 
-Noeud_t ** Rechercher(Arbre_t * pt_arbre, char * pt_mot, int * indiceMot){// à optimiser!!!!
+Noeud_t ** Rechercher(Arbre_t * pt_arbre, char * pt_mot, int * indiceMot, int * trouve){// à optimiser!!!!
     *indiceMot=0;
+    *trouve=0;
     bool arret=false;
     //Arbre_t retour=arbre;
     Noeud_t * cour=*pt_arbre;
@@ -84,7 +85,10 @@ Noeud_t ** Rechercher(Arbre_t * pt_arbre, char * pt_mot, int * indiceMot){// à 
 		if(cour!=NULL && tolower(cour->lettre)==pt_mot[*indiceMot]){//si on tombe sur la bonne lettre et que cours à au moins un fils
 			prec=&(cour->lv);
 			cour=cour->lv;
-			if(pt_mot[*indiceMot+1]=='\0') arret=true; // si on est à la fin du mot
+			if(pt_mot[*indiceMot+1]=='\0'){ // si on est à la fin du mot
+				arret=true; 
+				*trouve=1;
+			}
 			else (*indiceMot)++;
 		}
 		else arret=true;
@@ -95,10 +99,11 @@ Noeud_t ** Rechercher(Arbre_t * pt_arbre, char * pt_mot, int * indiceMot){// à 
 //à la fin de rechercher i correspond à l'indice de la première lettre à insérer
 
 
+
 void Insertion(Arbre_t * pt_arbre, char * mot){
     int i=0;
-    
-    Noeud_t ** prec = Rechercher(pt_arbre, mot, &i);
+    int trouve=0;
+    Noeud_t ** prec = Rechercher(pt_arbre, mot, &i, &trouve);
     Noeud_t * nouvLettre=NULL;
     
     nouvLettre=InitNoeud(mot[i]);

@@ -19,8 +19,8 @@ int main()
 	Arbre_t arbre=NULL;
 	
     ChargerMots(&arbre);
-    Affichage(&arbre);
-    RechercheDico(&arbre, "sc");
+    Affichage(&arbre,"");
+    RechercheDico(&arbre, "se");
    // Affichage(&arbre);
 	//~ int tab[3] = T
 	//~ if (tolower('A')=='a'){

@@ -7,7 +7,7 @@
 
 int ChargerMots(Arbre_t * pt_arbre)
 {
-    /*const char* path = "/Users/pereiraloann/desktop/TP_SDD/TP3/TP3_SDD/mots.txt";/*xcode ne prend que des chemins absolus*/
+    /*const char* path = "/Users/pereiraloann/desktop/TP_SDD/TP3/TP3_SDD/mots.txt";xcode ne prend que des chemins absolus*/
     const char* path = "mots.txt";
 	int code = 0;
 	char mot[30];
@@ -38,7 +38,7 @@ int ChargerMots(Arbre_t * pt_arbre)
 
 
 
-void Affichage(Arbre_t *pt_arbre){ /*utilisation du parcours en profondeur*/
+void Affichage(Arbre_t *pt_arbre, char *motif){ /*utilisation du parcours en profondeur*/
     Arbre_t cour=NULL;  /*utilisation d'un pointeur courant*/
     cour=*pt_arbre;
     
@@ -48,7 +48,7 @@ void Affichage(Arbre_t *pt_arbre){ /*utilisation du parcours en profondeur*/
     int mistake =0;
     int *err=&mistake;
     
-    char mot[30]={NULL}; /*mot qui permet l'affichage des mots de l'arbre*/
+    char mot[30]={0}; /*mot qui permet l'affichage des mots de l'arbre*/
     int i=0;
     while(!estVide(pt_pile) || cour !=NULL){
         mot[i]=cour->lettre;
@@ -56,7 +56,10 @@ void Affichage(Arbre_t *pt_arbre){ /*utilisation du parcours en profondeur*/
         if((int)cour->lettre<90){                   /*(97 à 122 pour les minuscules et 65 à 90 pour les Maj) on arrive à une maj -->fin du mot*/
             mot[i-1]=tolower(mot[i-1]);             /* on passe la dernière lettre en minuscule*/
             mot[strlen(mot)] = 0;                   /* \0 à la fin du mot*/
+            if(motif==NULL)
             printf("%s\n",mot);               /* on affiche le mot*/
+            else
+            printf("%s%s\n",motif,mot);
         }
         empiler(pt_pile, cour, err);
         cour=cour->lv;
@@ -69,18 +72,30 @@ void Affichage(Arbre_t *pt_arbre){ /*utilisation du parcours en profondeur*/
     }
 }
 
-
 void RechercheDico(Arbre_t *pt_arbre, char* val){
     int indiceMot=0;
+    int trouve=0;
     Noeud_t ** noeud=NULL;
-    noeud=Rechercher(pt_arbre, val, &indiceMot);
-    printf("lettre de noeud:%c\n",(*noeud)->lettre);
-    printf("lettre de val:%c\n",val[strlen(val)-1]);
-    if(*noeud!=NULL && *pt_arbre!=NULL){
+    noeud=Rechercher(pt_arbre, val, &indiceMot, &trouve);
+    
+   /* printf("indice post recherche: %d\n",indiceMot);
+    printf("Taille val:%ld\n",strlen(val));
+    printf("lettre pointé par noeud:%c\n",(*noeud)->lettre);
+    printf("val[indiceMot]=%c\n",val[indiceMot]);
+    printf("dernière lettre de val:%c\n",val[strlen(val)-1]);
+    */
+    printf("trouve = %d\n",trouve);
+    if(trouve==1&&*pt_arbre!=NULL){
         printf("mot commençant par %s sont:\n",val);
-        Affichage(noeud);
+        if(*noeud==NULL){
+			 printf("%s\n",val);
+		 }
+        else{
+			Affichage(noeud,val);
+		}
     }
     else{
         printf("Aucun mot trouvé commençant par %s.\n",val);
     }
 }
+
