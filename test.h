@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h> 
+#include "arbre.h"
+#include "dico.h"
 
 void test_Charger_Mots();
 void test_Insertion();
