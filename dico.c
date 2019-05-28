@@ -7,8 +7,8 @@
 
 int ChargerMots(Arbre_t * pt_arbre)
 {
-    const char* path = "/Users/pereiraloann/desktop/TP_SDD/TP3/TP3_SDD/mots.txt";/*xcode ne prend que des chemins absolus*/
-    /*const char* path = "mots.txt"; pour valentin */
+    /*const char* path = "/Users/pereiraloann/desktop/TP_SDD/TP3/TP3_SDD/mots.txt";/*xcode ne prend que des chemins absolus*/
+    const char* path = "mots.txt";
 	int code = 0;
 	char mot[30];
 	FILE * fichier = NULL;

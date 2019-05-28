@@ -1,7 +1,7 @@
 CC= gcc
 CFLAGS=-Wall -Wextra -pedantic
 
-OBJ= main.o arbre.o dico.o
+OBJ= main.o arbre.o dico.o pile.o
 
 EXEC=exec
 
