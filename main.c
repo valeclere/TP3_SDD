@@ -12,6 +12,7 @@ int main()
     
     test_Charger_Mots();
     test_Rechercher();
+    test_Insertion();
     
 	/*---------FIN TESTS----------*/
 	return 0;

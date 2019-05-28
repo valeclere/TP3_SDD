@@ -80,25 +80,27 @@ void Insertion(Arbre_t * pt_arbre, char * mot){
     int trouve=0; /*booleen qui permet de savoir si le mot existe déjà dans l'arbre en mémoire*/
     Noeud_t ** prec = Rechercher(pt_arbre, mot, &i, &trouve); /*on récupère prec pour insérer la fin du mot*/
     Noeud_t * nouvLettre=NULL;
-    
-    
-    if(!trouve){
-		nouvLettre=InitNoeud(mot[i]); /*allocation d'un nouveau noeud*/
-		nouvLettre->lettre=mot[i]; /*on place la prochaine lettre*/
-		nouvLettre->lh=*prec; /*on chaine la nouvelle lettre dans la liste des frères*/
-		*prec=nouvLettre;
-		prec=&nouvLettre->lv; /*on actualise prec sur le nouveau noeud en lien vertical pour insérer toute la suite*/
-		i++; /*on se déplace dans le mot*/
-		
-		while (mot[i]!='\0'){ /*tant qu'on a pas inséré tout le mot on réalise une insertion verticale de la lettre*/
-			nouvLettre=InitNoeud(mot[i]);
-			nouvLettre->lettre=mot[i];
-			*prec=nouvLettre;
-			prec=&nouvLettre->lv;
-			i++;
-		}
-		nouvLettre->lettre = toupper(nouvLettre->lettre); /*on transforme la dernière lettre en majuscule*/
-	}
+    if(strlen(mot)>=1){
+        
+        if(!trouve){
+            nouvLettre=InitNoeud(mot[i]); /*allocation d'un nouveau noeud*/
+            nouvLettre->lettre=mot[i]; /*on place la prochaine lettre*/
+            nouvLettre->lh=*prec; /*on chaine la nouvelle lettre dans la liste des frères*/
+            *prec=nouvLettre;
+            prec=&nouvLettre->lv; /*on actualise prec sur le nouveau noeud en lien vertical pour insérer toute la suite*/
+            i++; /*on se déplace dans le mot*/
+            
+            while (mot[i]!='\0'){ /*tant qu'on a pas inséré tout le mot on réalise une insertion verticale de la lettre*/
+                nouvLettre=InitNoeud(mot[i]);
+                nouvLettre->lettre=mot[i];
+                *prec=nouvLettre;
+                prec=&nouvLettre->lv;
+                i++;
+            }
+            nouvLettre->lettre = toupper(nouvLettre->lettre); /*on transforme la dernière lettre en majuscule*/
+        }
+    }
+    else printf("Un mot est vide et donc ne peut être inséré.\n");
 }
 
 
