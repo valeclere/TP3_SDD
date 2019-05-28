@@ -1,7 +1,7 @@
 /* Module contenant les fonctions pour insérer les mots dans l'arbre*/
 
 #include "arbre.h"
-
+#include "pile.h"
 
 Noeud_t * InitNoeud(char lettre)
 {
@@ -76,6 +76,40 @@ void Insertion(Arbre_t * pt_arbre, char * mot){
     nouvLettre->lettre = toupper(nouvLettre->lettre);
     //printf("derniere lettre = %c\n", nouvLettre->lettre);
 }
+
+
+
+void LiberationArbre(Arbre_t * pt_arbre){
+	Arbre_t      cour=NULL;                          /*utilisation d'un pointeur courant*/
+	Arbre_t		 tmp=NULL;
+    Pile_t     * pt_pile=NULL;                       /*initialisation de la pile*/
+    int          mistake=0;                          /*variable qui acceuille les codes retours*/
+    char         mot[30]={0};                        /*mot qui permet l'affichage des mots de l'arbre*/
+    int          i=0;                                /*indice pour le parcours de mot*/
+    
+    pt_pile = initPile(10);                          /*initialisation de la pile (taille=10) */
+    cour=*pt_arbre;
+    
+	while(!estVide(pt_pile) || cour !=NULL){        /*utilisation du parcours en profondeur*/
+        empiler(pt_pile, cour, &mistake);      
+        cour=cour->lv;    
+        while(cour==NULL && !estVide(pt_pile)){    
+            cour=depiler(pt_pile, &mistake);
+            tmp=cour;
+            cour=cour->lh;
+            free(tmp);    
+        }
+    }
+    
+    libererPile(pt_pile);
+}
+
+
+
+
+
+
+
 
 
 

@@ -17,8 +17,8 @@
 
 int ChargerMots(Arbre_t * pt_arbre)
 {
-    const char* path = "/Users/pereiraloann/desktop/TP_SDD/TP3/TP3_SDD/mots.txt";/*xcode ne prend que des chemins absolus*/
-    /*const char* path = "mots.txt";*/
+   /* const char* path = "/Users/pereiraloann/desktop/TP_SDD/TP3/TP3_SDD/mots.txt";xcode ne prend que des chemins absolus*/
+	const char* path = "mots.txt";
 	int code = 0;
 	char mot[30];               /*chaine de caractère qui acceuille les différents mots lu*/
 	FILE * fichier = NULL;
@@ -87,6 +87,7 @@ void Affichage(Arbre_t *pt_arbre, char *motif){
             cour=cour->lh;                                          /*      fin postfixé     */
         }
     }
+    libererPile(pt_pile);
 }
 
 /* ----------------------------------------------------------------------------------------------------------- */

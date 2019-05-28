@@ -173,25 +173,4 @@ void libererPile(Pile_t * pt_pile)
 }
 
 
-
-/*  extension d'affichage pour réaliser les tests  */
-
-void affichagePile(Pile_t * pt_pile)
-{
-	int i=0;
-	
-	if((pt_pile!=NULL) && (pt_pile->nb_elt!=0))
-	{		
-		for (i=0;i<pt_pile->taille;i++)
-		{
-			printf("element n°%d =" FORMAT_ELT, pt_pile->taille-i, pt_pile->pt_tab[pt_pile->taille-i-1]) ;
-		}
-	}
-	
-	else 
-	{
-		printf("pile vide ---> rien à afficher\n");
-	}
-}
-
 /* ----FIN DU MODULE---- */

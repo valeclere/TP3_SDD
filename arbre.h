@@ -7,7 +7,6 @@
 #include <stdbool.h>
 #include <ctype.h>
 
-
 typedef struct Noeud_s{
 	char lettre;
 	struct Noeud_s * lv;
@@ -18,5 +17,5 @@ typedef struct Noeud_s{
 Noeud_t * InitNoeud(char lettre);
 Noeud_t ** Rechercher(Arbre_t * pt_arbre, char * pt_mot, int * indiceMot, int *trouve);
 void Insertion(Arbre_t * pt_arbre, char * mot);
-
+void LiberationArbre(Arbre_t * pt_arbre);
 #endif
