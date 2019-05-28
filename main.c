@@ -5,7 +5,6 @@
 int main()
 {
 	Arbre_t arbre=NULL;
-	
     ChargerMots(&arbre);
     //Affichage(&arbre,"");
     RechercheDico(&arbre, "ta");
