@@ -9,16 +9,17 @@
 /*                                                                                                             */
 /*  En entrée :                                                                                                */
 /*      -pt_arbre = pointeur sur la structure arbre qui est elle même un pointeur sur la strucutre Noeud       */
+/*		-path = chaine de caractère correspondant au nom du fichier que l'on veut charger					   */
 /*                                                                                                             */
 /*  En sortie :                                                                                                */
 /*      -code = entier qui permet de déterminer si l'exécution du chargement des mots s'est bien passé ou non  */
 /* ----------------------------------------------------------------------------------------------------------- */
 #include "dico.h"
 
-int ChargerMots(Arbre_t * pt_arbre)
+int ChargerMots(Arbre_t * pt_arbre, char* path)
 {
    /* const char* path = "/Users/pereiraloann/desktop/TP_SDD/TP3/TP3_SDD/mots.txt";xcode ne prend que des chemins absolus*/
-	const char* path = "mots.txt";
+	//const char* path = "mots.txt";
 	int code = 0;
 	char mot[30];               /*chaine de caractère qui acceuille les différents mots lu*/
 	FILE * fichier = NULL;
